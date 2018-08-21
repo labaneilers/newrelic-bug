@@ -1,17 +1,29 @@
 {
-  "name": "newrelic-bug",
+  "name": "imgsrv",
   "version": "1.0.0",
-  "description": "Bug example",
-  "main": "server.js",
-  "dependencies": {
-    "express": "^4.16.3",
-    "newrelic": "^4.8.0"
-  },
-  "devDependencies": {},
+  "description": "A proxy server which optimizes images",
+  "main": "./server.js",
   "scripts": {
-    "test": "node server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "debug": "nodemon --legacy-watch --watch ./ --inspect=0.0.0.0:9222 --nolazy ./server.js",
+    "docker:debug": "docker-compose up debug",
+    "docker": "docker-compose up web",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
   },
-  "author": "",
-  "license": "ISC"
+  "author": "laban@eilers.com",
+  "license": "ISC",
+  "repository": "https://github.com/labaneilers/imgsrv",
+  "dependencies": {
+    "await-stream-ready": "^1.0.1",
+    "express": "^4.16.3",
+    "express-http-context": "^1.0.4",
+    "newrelic": "^4.8.0",
+    "request": "^2.87.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.2.0",
+    "nodemon": "^1.17.5"
+  }
 }

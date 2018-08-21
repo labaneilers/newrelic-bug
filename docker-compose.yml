@@ -3,19 +3,31 @@ version: "2"
 services:
   debug:
     build: .
-    command: node server.js
+    command: npm run debug
     volumes:
       - ./:/server
     ports:
       - "8083:80"
       - "9222:9222"
     environment:
+      # - IMGSRV_ORIGIN_WHITELIST=www.vistaprint.com,s3-eu-west-1.amazonaws.com/sitecore-media-bucket
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
+      - IMGSRV_LOG_INDENT=1
+      - IMGSRV_VERBOSE=1
+      #- IMGSRV_MAX_SIZE=2457408
       - NODE_ENV=development
       - NEWRELIC_LICENSE_KEY
   web:
     build: .
-    command: node server.js
+    command: npm start
+    tmpfs:
+      - /imgsrvtmp:size=1G
     ports:
       - "8083:80"
     environment:
+      # - IMGSRV_ORIGIN_WHITELIST=www.vistaprint.com,upload.wikimedia.org
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
+      - IMGSRV_TEMP=/imgsrvtmp
+      - IMGSRV_LOG_INDENT=1
+      - IMGSRV_VERBOSE=1
       - NEWRELIC_LICENSE_KEY
