@@ -11,5 +11,6 @@
   "repository": "https://github.com/labaneilers/newrelic-bug",
   "dependencies": {
     "express": "^4.16.3",
-    "newrelic": "^4.8.0"  }
+    "newrelic": "^4.8.0"
+  }
 }
