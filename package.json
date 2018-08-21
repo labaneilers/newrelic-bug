@@ -1,7 +1,7 @@
 {
-  "name": "imgsrv",
+  "name": "newrelic-bug",
   "version": "1.0.0",
-  "description": "A proxy server which optimizes images",
+  "description": "Demonstration of NewRelic bug",
   "main": "./server.js",
   "scripts": {
     "start": "node server.js"

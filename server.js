@@ -11,12 +11,10 @@ const app = express();
 
 app.get('/', async (req, res, next) => {
 
-  newrelic.setTransactionName('GET/success');
+  newrelic.setTransactionName('GET/');
 
-  let timeout = parseInt(req.query.t) || 10000;
-  if (timeout > 0) {
-    await asyncTimeout(parseInt(req.query.t) || 10000);
-  }
+  await asyncTimeout(1000);
+
   res
     .status(200)
     .set({
@@ -24,6 +22,25 @@ app.get('/', async (req, res, next) => {
         'content-type': 'text/html'
     })
     .send('<html><head><title>Success</title></head><body><pre>Success</pre></body></html>');
+});
+
+app.get('/promise', async (req, res, next) => {
+
+  newrelic.setTransactionName('GET/promise');
+
+  asyncTimeout(1000)
+    .then(() => {
+      res
+        .status(200)
+        .set({
+            'cache-control': 'no-cache',
+            'content-type': 'text/html'
+        })
+        .send('<html><head><title>Success</title></head><body><pre>Success</pre></body></html>');
+    })
+    .catch(ex => {
+      console.log(ex);
+    });
 });
 
 // Constants
