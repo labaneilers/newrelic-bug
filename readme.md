@@ -1,4 +1,8 @@
-# Reproduction recipe for NewRelic promise bug
+# NewRelic promise bug
+
+When using a function wrapped by ```util.promisify()```, the resulting promise is rejected because the NewRelic wrapper is passing arguments in an incorrect order.
+
+## Reproduction steps
 
 1. Ensure you have docker installed
 2. Ensure you have an environment variable ```NEW_RELIC_LICENSE_KEY``` with a valid NewRelic license key.
