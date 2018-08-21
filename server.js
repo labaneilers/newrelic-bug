@@ -2,24 +2,16 @@
 
 // Framework dependencies
 const express = require('express');
-const fs = require('fs');
-const newrelic = process.env.NEWRELIC_LICENSE_KEY ? require('newrelic') : null;
-
-// Constants
-const PORT = 80;
-const HOST = '0.0.0.0';
+const newrelic = require('newrelic');
+const util = require('util');
+let asyncTimeout = util.promisify(setTimeout);
 
 // App
 const app = express();
 
-const util = require('util');
-let asyncTimeout = util.promisify(setTimeout);
-
 app.get('/', async (req, res, next) => {
 
-  if (newrelic) {
-    newrelic.setTransactionName('GET/success');
-  }
+  newrelic.setTransactionName('GET/success');
 
   let timeout = parseInt(req.query.t) || 10000;
   if (timeout > 0) {
@@ -33,6 +25,10 @@ app.get('/', async (req, res, next) => {
     })
     .send('<html><head><title>Success</title></head><body><pre>Success</pre></body></html>');
 });
+
+// Constants
+const PORT = 80;
+const HOST = '0.0.0.0';
 
 app.listen(PORT, HOST);
 
