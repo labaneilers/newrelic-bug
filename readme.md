@@ -1,9 +1,11 @@
-# Repro recipe for NewRelic promise bug
+# Reproduction recipe for NewRelic promise bug
 
 1. Ensure you have docker installed
 2. Ensure you have an environment variable ```NEW_RELIC_LICENSE_KEY``` with a valid NewRelic license key.
-3. Run ```docker-compose up --build``` to start the server
-4. Hit the URL: ```http://localhost:8083```. Note the page hangs while an error is logged to the console:
+3. Run ```docker-compose up --build``` to build and start the server
+4. Hit the URL: http://localhost:8083 
+
+Note the page hangs while an error is logged to the console:
 
 ```
 web_1  | TypeError [ERR_INVALID_CALLBACK]: Callback must be a function
@@ -18,3 +20,11 @@ web_1  |     at _applyRecorderSegment (/server/node_modules/newrelic/lib/shim/sh
 web_1  |     at _doRecord (/server/node_modules/newrelic/lib/shim/shim.js:928:17)
 web_1  |     at /server/node_modules/newrelic/lib/shim/shim.js:913:24
 ```
+
+Then, you can verify that removing NewRelic fixes the problem:
+
+1. In ```server.js```, comment out the line that has ```require('newrelic');```
+3. Run ```docker-compose up --build``` to rebuild and start the server
+4. Hit the URL: http://localhost:8083
+
+Note the page succeeds and no error is logged.
