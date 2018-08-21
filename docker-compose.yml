@@ -7,4 +7,8 @@ services:
     ports:
       - "8083:80"
     environment:
-      - NEWRELIC_LICENSE_KEY
+      - NEW_RELIC_LICENSE_KEY
+      - NEW_RELIC_APP_NAME=newrelicbug
+      - NEW_RELIC_NO_CONFIG_FILE=1
+      - NEW_RELIC_LOG=stdout
+      - NEW_RELIC_LOG_LEVEL=info

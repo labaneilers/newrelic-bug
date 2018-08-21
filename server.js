@@ -1,15 +1,11 @@
 'use strict';
 
-const newrelic = require('newrelic');
-const express = require('express');
+require('newrelic');
+const app = require('express')();
 const util = require('util');
 let asyncTimeout = util.promisify(setTimeout);
 
-const app = express();
-
 app.get('/', (req, res, next) => {
-
-  newrelic.setTransactionName('GET/');
 
   asyncTimeout(1000)
     .then(() => {
@@ -20,9 +16,6 @@ app.get('/', (req, res, next) => {
     });
 });
 
-const PORT = 80;
-const HOST = '0.0.0.0';
+app.listen(80, '0.0.0.0');
 
-app.listen(PORT, HOST);
-
-console.log(`http://${HOST}:${PORT}`);
+console.log('Started server');
