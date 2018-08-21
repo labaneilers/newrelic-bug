@@ -2,3 +2,4 @@
 .gitignore
 .vscode
 docker-compose.yml
+readme.md
