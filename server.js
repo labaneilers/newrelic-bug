@@ -4,7 +4,7 @@
 const express = require('express');
 const util = require('util');
 const asyncTimeout = util.promisify(setTimeout);
-const newrelic = process.env.NEWRELIC_LICENSE_KEY ? require('newrelic') : null;
+const newrelic = require('newrelic');
 
 // Constants
 const PORT = 80;
