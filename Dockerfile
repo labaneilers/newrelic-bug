@@ -9,8 +9,6 @@ WORKDIR /server
 COPY package*.json ./
 
 RUN npm install --production
-# If you are building your code for production
-# RUN npm install --only=production
 
 # Bundle app source
 COPY . .
