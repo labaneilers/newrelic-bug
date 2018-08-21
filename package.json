@@ -1,0 +1,17 @@
+{
+  "name": "newrelic-bug",
+  "version": "1.0.0",
+  "description": "Bug example",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.3",
+    "newrelic": "^4.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
